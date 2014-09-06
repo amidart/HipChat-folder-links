@@ -1,6 +1,6 @@
 (function() {
 
-  var URL = 'https://foroenergy.hipchat.com/chat';
+  var URL = 'https://hipchat.com/chat';
 
   chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.create({url: URL});
