@@ -48,6 +48,10 @@ var Module = (function(my){
       text = text.replace(/^(.*)\\.*?\.\w+$/, '$1');
       a.setAttribute('href', 'file://' + text);
       a.setAttribute('target', '_blank');
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        chrome.runtime.sendMessage({cmd: "openExplorer", data: a.href}, null);
+      });
     }
   }
 

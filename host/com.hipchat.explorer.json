@@ -1,0 +1,10 @@
+{
+  "name": "com.hipchat.explorer",
+  "description": "Chrome Native Messaging API Host",
+  "path": "C:\\extension_host.exe",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://ehkinnkedgheenjbbkljkccndhodnecn/",
+    "chrome-extension://igmhebgidlbjbfgfahhaipgmnhgplmjk/"
+  ]
+}
