@@ -45,12 +45,14 @@ var Module = (function(my){
     if (!a) return;
     var text = a.textContent;
     if (text.match(/^\\\\.*/)) {
-      text = text.replace(/^(.*)\\.*?\.\w+$/, '$1');
-      a.setAttribute('href', 'file://' + text);
+      var filePath = text;
+      var dirPath = text.replace(/^(.*)\\.*?\.\w+$/, '$1');
+
+      a.setAttribute('href', 'file://' + dirPath);
       a.setAttribute('target', '_blank');
       a.addEventListener('click', function(e){
         e.preventDefault();
-        chrome.runtime.sendMessage({cmd: "openExplorer", data: a.href}, null);
+        chrome.runtime.sendMessage({cmd: "openFile", data: {file: filePath, dir: dirPath}}, null);
       });
     }
   }
