@@ -5,9 +5,9 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
-    ofstream myfile;
-    myfile.open ("C:\\extension-debug.txt");
-    myfile << "Host is running...\n";
+    ofstream log;
+    log.open ("C:\\HipChatLinksHelper.log", ofstream::out | ofstream::app);
+    log << "Host is running...\n";
     // ======================== Read message
 
     unsigned int length = 0;
@@ -17,31 +17,35 @@ int main(int argc, char* argv[]) {
         c = getchar();
         length += c << i*8;
     }
-    myfile << "Message from Chrome:\nLength: " << length << "\n";
+    log << "Message from Chrome:\nLength: " << length << "\n";
     //read the json-message
     string msg = "";
     for (int i = 0; i < length; i++) {
         msg += getchar();
     }
-    myfile << "Body: " << msg << "\n";
+    log << "Body: " << msg << "\n";
 
     // ======================== Process message, open explorer
     
-    // Has: {"t":"file://C:/Windows"}
+    // Has: {"file":"file://C:/Windows/test.txt","dir":"file://C:/Windows","cmd":"opendir"}
     // Want: file://C:/Windows
-    string path = msg.substr(6, msg.length() - 6 - 2);
-    myfile << "\nExtracted path: " << path << "\n\n";
+    
+    std::size_t pos = msg.find("\"dir\":");
+    string path = msg.substr(pos + 7);
+    pos = path.find("\"");
+    path = path.substr(0, pos);
+    log << "\nExtracted path: " << path << "\n\n";
 
     //string cmd = "explorer \"" + path + '"';
-    //myfile << cmd.c_str() << "\n";
+    //log << cmd.c_str() << "\n";
     
-    myfile << "Opening path...\n";
+    log << "Opening path...\n";
     HINSTANCE nResult = ShellExecute(NULL, "open", path.c_str(), NULL, NULL, SW_SHOWDEFAULT);
-    if ((int) nResult > 32) myfile << "Success!\n";
-    else myfile << "Error: " << (int) nResult << "\n";
+    if ((int) nResult > 32) log << "Success!\n";
+    else log << "Error: " << (int) nResult << "\n";
 
     // ======================== Send response
-    myfile << "Sending response to extension\n";
+    log << "Sending response to extension\n";
     // Define our message
     string message = "{\"text\": \"This is a response message\"}";
     // Collect the length of the message
@@ -55,7 +59,7 @@ int main(int argc, char* argv[]) {
     // Now we can output our message
     cout << message;
     
-    myfile << flush;
-    myfile.close();
+    log << "\n==========\n\n" << flush;
+    log.close();
     return 0;
 }

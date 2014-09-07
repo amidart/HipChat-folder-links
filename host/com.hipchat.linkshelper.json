@@ -1,7 +1,7 @@
 {
-  "name": "com.hipchat.explorer",
+  "name": "com.hipchat.linkshelper",
   "description": "Chrome Native Messaging API Host",
-  "path": "C:\\extension_host.exe",
+  "path": "HipChatLinksHelper.exe",
   "type": "stdio",
   "allowed_origins": [
     "chrome-extension://ehkinnkedgheenjbbkljkccndhodnecn/",
