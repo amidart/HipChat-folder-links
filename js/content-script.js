@@ -52,7 +52,7 @@ var Module = (function(my){
       a.setAttribute('target', '_blank');
       a.addEventListener('click', function(e){
         e.preventDefault();
-        chrome.runtime.sendMessage({cmd: "openFile", data: {file: filePath, dir: dirPath}}, null);
+        chrome.runtime.sendMessage({cmd: "openDir", data: {file: filePath, dir: dirPath}}, null);
       });
     }
   }
