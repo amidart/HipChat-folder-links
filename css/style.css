@@ -1,0 +1,10 @@
+span.hipchatlinkshelper {
+  margin-left: 10px !important;
+  padding: 2px 4px !important;
+  background: #FDECC6;
+  border: solid 1px #E6D0AA;
+  border-radius: 5px;
+}
+.hipchatlinkshelper a {
+  margin: 0 3px !important;
+}

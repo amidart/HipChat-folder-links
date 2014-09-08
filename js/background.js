@@ -22,6 +22,10 @@
         else if (request.cmd === 'openDir') {
           openDir(request.data);
         }
+        else if (request.cmd === 'newTab') {
+          console.log(request);
+          chrome.tabs.create({url: request.data});
+        }
       });
   };
 

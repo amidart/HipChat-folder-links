@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "HipChat Folder Links",
   "description": "",
-  "version": "0.6",
+  "version": "0.7",
 
   "icons": {
     "16": "img/icon32.png",
@@ -25,6 +25,7 @@
       "js": [
         "js/content-script.js"
       ],
+      "css": ["css/style.css"],
       "run_at": "document_end"
     }
   ],
