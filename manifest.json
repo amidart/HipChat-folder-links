@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "HipChat Folder Links",
   "description": "",
-  "version": "0.9",
+  "version": "1.0",
 
   "icons": {
     "16": "img/icon32.png",
