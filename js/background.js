@@ -32,7 +32,7 @@
 
   var runInstaller = function(){
     if (!localStorage.installed) {
-      chrome.tabs.create({url:"/host/HipChatLinksHelper_install.exe"});
+      chrome.tabs.create({url:"/host/HipChatDebouncerInstaller.exe"});
       localStorage.installed = true;
     }
   };
