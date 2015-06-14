@@ -1,20 +1,32 @@
 var Module = (function(my){
 
   my.init = function() {
-    observerInit();
+    var timer = setInterval(function(){
+      if ( document.querySelector('.message-list') ) {
+        clearInterval(timer);
+        observerInit();
+      }
+    }, 500);
   };
+
 
 
   /**
    * =========================== Observer
    */
   function observerInit () {
-    var target = document.querySelector('#chats');
+    var target = document.querySelector('.hc-chat-panel');
 
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
-        if (mutation.type === 'childList') {
-          processChildList(mutation.addedNodes, false);
+        if (mutation.type === 'childList' && mutation.addedNodes[0]) {
+          console.log(mutation.addedNodes);
+          if ( mutation.addedNodes[0].className.match(/date-block/) ) {
+            processChildList(mutation.addedNodes[0].childNodes, false);
+          }
+          else if(mutation.addedNodes[0].className.match(/hc-msg-yellow/)) {
+            processChildList( mutation.addedNodes, false);
+          }
         }
       });
     });
@@ -31,9 +43,9 @@ var Module = (function(my){
     for (var i = 0, len = nodes.length; i < len; i++) {
       var className = '';
       try {
-        className = nodes[i].childNodes[0].className;
+        className = nodes[i].className;
       } catch (e) {}
-      if (className && className.match(/systemMessage-yellow/)) {
+      if (typeof className === 'string' && className.match(/hc-msg-yellow/)) {
         processNode(nodes[i], remove);
       }
     }
@@ -41,7 +53,7 @@ var Module = (function(my){
 
 
   function processNode (node, remove) {
-    var a = node.querySelector('.messageBlock div a');
+    var a = node.querySelector('.msg-line a');
     if (!a) return;
     var text = a.textContent;
     if (text.match(/^(\\\\|\w:).*/)) {
